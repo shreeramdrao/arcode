@@ -4,24 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR Model Viewer</title>
+
+    <!-- A-Frame Library -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.min.js"></script>
+
+    <!-- AR.js Library for Augmented Reality -->
+    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.js"></script>
+
+    <!-- Custom CSS (for full-screen AR experience) -->
     <style>
-        body { margin: 0; overflow: hidden; }
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        a-scene {
+            width: 100%;
+            height: 100%;
+        }
+        #model {
+            animation: modelAnimation 5s infinite;
+        }
+        @keyframes modelAnimation {
+            0% { scale: 1 1 1; }
+            50% { scale: 1.2 1.2 1.2; }
+            100% { scale: 1 1 1; }
+        }
     </style>
 </head>
 <body>
-    <a-scene embedded arjs>
-        <!-- Load the AR model -->
-        <a-entity 
-             gltf-model="https://e954e33b.ar-qrcode.pages.dev/doric%20pillar.glb"
-             position="0 0 -3" 
-             rotation="0 180 0"
-             scale="1 1 1">
-        </a-entity>
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+        <!-- Camera with AR.js settings -->
+        <a-camera position="0 1.6 0" look-controls="pointerLockEnabled: false;" fov="80" zoom="1"></a-camera>
 
-        <!-- AR Camera -->
-        <a-marker-camera preset="custom"></a-marker-camera>
+        <!-- Plane to place the model on -->
+        <a-plane position="0 0 0" rotation="-90 0 0" width="100" height="100" color="#7BC8A4" shadow="cast: true;"></a-plane>
+
+        <!-- 3D Model from GitHub (change to your actual URL) -->
+        <a-entity 
+            id="model"
+            gltf-model="https://6ad30e26.ar-qrcode.pages.dev/assets/doric_pillar.glb" 
+            scale="1 1 1" 
+            position="0 0 -3" 
+            rotation="0 180 0"
+        ></a-entity>
     </a-scene>
 </body>
 </html>
