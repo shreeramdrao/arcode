@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Model Viewer</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+    </style>
+</head>
+<body>
+    <a-scene embedded arjs>
+        <!-- Load the AR model -->
+        <a-entity 
+             gltf-model="https://e954e33b.ar-qrcode.pages.dev/doric%20pillar.glb"
+             position="0 0 -3" 
+             rotation="0 180 0"
+             scale="1 1 1">
+        </a-entity>
+
+        <!-- AR Camera -->
+        <a-marker-camera preset="custom"></a-marker-camera>
+    </a-scene>
+</body>
+</html>
